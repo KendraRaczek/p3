@@ -6,7 +6,10 @@ import java.util.Comparator;
  *
  */
 public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
-    // TODO
+    // TODO - working
+	private FileLine[] queue;
+	private int numItems;
+	
     private Comparator<FileLine> cmp;
     private int maxSize;
 
@@ -14,7 +17,10 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 		this.cmp = cmp;
 		maxSize = initialSize;
 		
-		// TODO
+		// TODO - working
+		queue = new FileLine[maxSize];
+		numItems = 0;
+		
     }
 
     public FileLine removeMin() throws PriorityQueueEmptyException {
@@ -24,7 +30,34 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     }
 
     public void insert(FileLine fl) throws PriorityQueueFullException {
-		// TODO
+		// TODO - working
+    	try {
+    		if (fl == null) throw new IllegalArgumentExeption();
+    		if (numItems >= maxSize) throw new PriorityQueueFullException();
+    	} catch (IllegalArgumentEception e) {
+    		System.out.println("Illegal Argument");
+    		System.exit(1);
+    	} catch (PriorityQueueFullException e) {
+    		System.out.println("Priority Queue Full");
+    		System.exit(1);
+    	}
+    	
+    	int child = numItems + 1;
+    	int parent = 0;
+    	boolean done = false;
+    	queue[child] = fl;
+    	while (! done) {
+    		parent = child / 2;
+    		if (parent == 0) {
+    			done = true;
+    		}
+    		else if (cmp.compare (queue[parent], queue[child]) < 0) {
+    			done = true;
+    		}
+ // TODO: else - swap
+    	}
+    	
+    	
     }
 
     public boolean isEmpty() {
