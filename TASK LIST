@@ -1,5 +1,5 @@
 1. WeatherRecord
-  o Data Members
+  - Data Members
   - WeatherLineComparator
     - compare()
     - clear()
@@ -7,7 +7,7 @@
     - toString()
   
 2. ThesaurusRecord
-  o Data Members
+  - Data Members
   - ThesaurusLineComparator
     - compare()
     - clear()
@@ -15,11 +15,11 @@
     - toString()
     
 3. FileLinePriorityQueue
-  - Data Members
-  - Constructor
+  o Data Members
+  o Constructor
   - removeMin()
     - throw a PriorityQueueEmptyException if the queue is empty
-  - insert()
+  o insert()
     - throw a PriorityQueueFullException if the queue is full
   - isEmpty()
   
