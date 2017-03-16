@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
@@ -6,7 +7,12 @@ import java.util.Comparator;
  */
 
 public class ThesaurusRecord extends Record{
-    // TODO declare data structures required
+    // TODO declare data structures required - WORKING
+	
+	private String word;
+	private ArrayList<String> syn;
+	
+	
 
 	/**
 	 * Constructs a new ThesaurusRecord by passing the parameter to the parent constructor
@@ -27,6 +33,9 @@ public class ThesaurusRecord extends Record{
 		public int compare(FileLine l1, FileLine l2) {
 			// TODO implement compare() functionality
 
+			
+			
+			
 			return 0;
 		}
 		
