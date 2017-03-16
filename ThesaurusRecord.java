@@ -33,10 +33,11 @@ public class ThesaurusRecord extends Record{
 		public int compare(FileLine l1, FileLine l2) {
 			// TODO implement compare() functionality
 
+			String[] line1 = l1.getString().split(":");
+			String[] line2 = l2.getString().split(":");
 			
+			return line1[0].compareTo(line2[0]);
 			
-			
-			return 0;
 		}
 		
 		public boolean equals(Object o) {
@@ -64,6 +65,7 @@ public class ThesaurusRecord extends Record{
 	 */
     public void join(FileLine w) {
 		// TODO implement join() functionality
+    	// use FileLine iterator
     }
 	
 	/**
