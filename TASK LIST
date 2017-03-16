@@ -1,5 +1,9 @@
+- not started
+o working
++ done
+
 1. WeatherRecord
-  o Data Members
+  o (K) Data Members
   - WeatherLineComparator
     - compare()
     - clear()
@@ -7,19 +11,19 @@
     - toString()
   
 2. ThesaurusRecord
-  o Data Members
+  o (K) Data Members
   - ThesaurusLineComparator
-    - compare()
+    o (K) compare()
     - clear()
     - join()
     - toString()
     
 3. FileLinePriorityQueue
-  o Data Members
-  o Constructor
+  o (K) Data Members
+  o (K) Constructor
   - removeMin()
     - throw a PriorityQueueEmptyException if the queue is empty
-  o insert()
+  o (K) insert()
     - throw a PriorityQueueFullException if the queue is full
   - isEmpty()
   
