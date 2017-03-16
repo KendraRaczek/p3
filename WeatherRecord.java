@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
@@ -6,7 +7,10 @@ import java.util.Comparator;
  * l stores the weather readings, in the same order as the files from which they came are indexed.
  */
 public class WeatherRecord extends Record{
-    // TODO declare data structures required
+    // TODO declare data structures required - WORKING
+	private int stationID;
+	private int date;
+	private ArrayList<Double> readings;
 
 	/**
 	 * Constructs a new WeatherRecord by passing the parameter to the parent constructor
