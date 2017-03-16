@@ -27,7 +27,12 @@ public class WeatherRecord extends Record{
 	 */
     private class WeatherLineComparator implements Comparator<FileLine> {
 		public int compare(FileLine l1, FileLine l2) {
-			// TODO implement compare() functionality
+			// TODO implement compare() functionality - WORKING
+			
+			// compare stationID
+			
+			// compare date
+			
 			
 			return 0;
 		}
@@ -62,6 +67,7 @@ public class WeatherRecord extends Record{
 	 */
     public void join(FileLine li) {
 		// TODO implement join() functionality
+    	// use FileLine iterator
     }
 	
 	/**
