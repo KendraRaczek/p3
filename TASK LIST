@@ -1,5 +1,5 @@
 1. WeatherRecord
-  - Data Members
+  o Data Members
   - WeatherLineComparator
     - compare()
     - clear()
@@ -7,7 +7,7 @@
     - toString()
   
 2. ThesaurusRecord
-  - Data Members
+  o Data Members
   - ThesaurusLineComparator
     - compare()
     - clear()
