@@ -57,6 +57,9 @@ public class ThesaurusRecord extends Record{
 	 */
     public void clear() {
 		// TODO initialize/reset data members
+    	
+    	word = null;
+    	syn.clear();
     }
 	
 	/**
@@ -72,7 +75,14 @@ public class ThesaurusRecord extends Record{
 	 * See the assignment description and example runs for the exact output format.
 	 */
     public String toString() {
-		// TODO
-		return null;
+		// TODO - WORKING
+    	
+    	String tRecord = word + ":";
+    	for (int i = 0; i < syn.size() - 1; i++) {
+			tRecord += syn.get(i) + ",";
+		}
+    	tRecord += syn.get(syn.size() -1);
+    	
+		return tRecord;
 	}
 }
