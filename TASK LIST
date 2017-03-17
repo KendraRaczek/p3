@@ -13,10 +13,10 @@ o working
 2. ThesaurusRecord
   o (K) Data Members
   - ThesaurusLineComparator
-    o (K) compare()
-    - clear()
+    + (K) compare()
+    + (K) clear()
     - join()
-    - toString()
+    o (K) toString()
     
 3. FileLinePriorityQueue
   o (K) Data Members
