@@ -11,11 +11,11 @@ o working
     - toString()
   
 2. ThesaurusRecord
-  o (K) Data Members
-  - ThesaurusLineComparator
+  + (KM) Data Members
+  + ThesaurusLineComparator
     + (K) compare()
     + (K) clear()
-    o (M) join()
+    + (M) join()
     + (K) toString()
     
 3. FileLinePriorityQueue
@@ -25,7 +25,7 @@ o working
     - throw a PriorityQueueEmptyException if the queue is empty
   o (K) insert()
     - throw a PriorityQueueFullException if the queue is full
-  - isEmpty()
+  o (M) isEmpty()
   
   4. Reducer
     - run() // main
