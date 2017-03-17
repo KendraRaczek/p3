@@ -8,12 +8,10 @@ import java.util.Comparator;
 
 public class ThesaurusRecord extends Record{
     // TODO declare data structures required - WORKING
-	
+	private int numFiles;
 	private String word;
-	private ArrayList<String> syn;
+	private ArrayList<String> syn = new ArrayList<String>;
 	
-	
-
 	/**
 	 * Constructs a new ThesaurusRecord by passing the parameter to the parent constructor
 	 * and then calling the clear method()
@@ -23,7 +21,7 @@ public class ThesaurusRecord extends Record{
 	clear();
     }
 
-    /**
+    	/**
 	 * This Comparator should simply behave like the default (lexicographic) compareTo() method
 	 * for Strings, applied to the portions of the FileLines' Strings up to the ":"
 	 * The getComparator() method of the ThesaurusRecord class will simply return an
@@ -37,9 +35,7 @@ public class ThesaurusRecord extends Record{
 			String[] line2 = l2.getString().split(":");
 			
 			return line1[0].compareTo(line2[0]);
-			
 		}
-		
 		public boolean equals(Object o) {
 			return this.equals(o);
 		}
@@ -57,9 +53,10 @@ public class ThesaurusRecord extends Record{
 	 */
     public void clear() {
 		// TODO initialize/reset data members
-    	
     	word = null;
-    	syn.clear();
+    	for(int i = syn.size() - 1; i >= 0; i--){
+		syn.remove(i);
+	}
     }
 	
 	/**
@@ -68,7 +65,15 @@ public class ThesaurusRecord extends Record{
 	 */
     public void join(FileLine w) {
 		// TODO implement join() functionality
-    	// use FileLine iterator
+	    String[] fileSplit = w.getString().split(":");
+	    word = fileSplit[0];
+	    String[] synArray = fileSplit[1].getString().split(",");
+	    for(int i = 0; i < synArray.length(); i++) {
+		    if(!syn.contains(synArray[i])) {
+			    syn.add(synArray[i]);
+		    }
+	    }
+	    Collections.sort(syn);
     }
 	
 	/**
@@ -76,13 +81,10 @@ public class ThesaurusRecord extends Record{
 	 */
     public String toString() {
 		// TODO - WORKING
-    	
     	String tRecord = word + ":";
     	for (int i = 0; i < syn.size() - 1; i++) {
 			tRecord += syn.get(i) + ",";
 		}
-    	tRecord += syn.get(syn.size() -1);
-    	
-		return tRecord;
-	}
+    	tRecord += syn.get(syn.size() - 1);
+	return tRecord;
 }
