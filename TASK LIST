@@ -16,7 +16,7 @@ o working
     + (K) compare()
     + (K) clear()
     - join()
-    o (K) toString()
+    + (K) toString()
     
 3. FileLinePriorityQueue
   o (K) Data Members
