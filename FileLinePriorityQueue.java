@@ -43,12 +43,10 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 	    	while (!done) {
 		    	if (child > numItems) {
 			    	done = true;
-		    	}
-		    	else if (cmp.compare(queue[parent], 
+		    	} else if (cmp.compare(queue[parent], 
 					     queue[child]) <= 0) {
 			    	done = true;
-		    	}
-		    	else {
+		    	} else {
 			    	swap(parent, child);
 			    	child = parent;
 		    	}
@@ -72,12 +70,10 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     			parent = child / 2;
     			if (parent == 0) {
     				done = true;
-    			}
-    			else if (cmp.compare(queue[parent], 
-					     queue[child]) <= 0) {
+    			} else if (cmp.compare(queue[parent], 
+					       queue[child]) <= 0) {
     				done = true;
-    			}
-			else {
+    			} else {
 				swap(parent, child);
 				child = parent;
     		}
