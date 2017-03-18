@@ -36,8 +36,8 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 			    done = true;
 		    }
 		    else {
-			    swapQueue(parent, child);
-			    parent = child;
+			    swap(parent, child);
+			    child = parent;
 		    }
 	    }
 	    numItems--;
@@ -68,13 +68,13 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     				done = true;
     			}
 			else {
-				swapQueue(parent, child);
-				parent = child;
+				swap(parent, child);
+				child = parent;
     		}
     		numItems++;
     	}
 		
-    	private void swapQueue(int parent, int child) {
+    	private void swap(int parent, int child) {
 	    	FileLine temp;
 	    	temp = queue[child];
 	    	queue[child] = queue[parent];
