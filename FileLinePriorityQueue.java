@@ -19,42 +19,37 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     	}
 	
 	public FileLine removeMin() throws PriorityQueueEmptyException {
-	    if(isEmpty()) {
-		    throw new PriortyQueueEmptyException();
-	    }
-	    FileLine min = queue[1];
-	    queue[1] = queue[numItems];
+	    	if(isEmpty()) {
+		    	throw new PriortyQueueEmptyException();
+	    	}
+	    	FileLine min = queue[1];
+	    	queue[1] = queue[numItems];
 	    
-	    int parent = 1;
-	    int child;
-	    boolean done = false;
-	    while(!done) {
-		    if(child > numItems) {
-			    done = true;
-		    }
-		    else if(cmp.compare(queue[parent], queue[child]) <= 0) {
-			    done = true;
-		    }
-		    else {
-			    swap(parent, child);
-			    child = parent;
-		    }
-	    }
-	    numItems--;
-	    return min;
+	    	int parent = 1;
+	    	int child;
+	    	boolean done = false;
+	    	while(!done) {
+		    	if(child > numItems) {
+			    	done = true;
+		    	}
+		    	else if(cmp.compare(queue[parent], queue[child]) <= 0) {
+			    	done = true;
+		    	}
+		    	else {
+			    	swap(parent, child);
+			    	child = parent;
+		    	}
+	    	}
+	    	numItems--;
+	    	return min;
     	}
 	
-	public void insert(FileLine fl) throws PriorityQueueFullException {
-		try {
-			if (fl == null) throw new IllegalArgumentExeption();
-			if (numItems >= maxSize) throw new PriorityQueueFullException();
-    		} catch (IllegalArgumentEception e) {
-    			System.out.println("Illegal Argument");
-    			System.exit(1);
-    		} catch (PriorityQueueFullException e) {
-    			System.out.println("Priority Queue Full");
-    			System.exit(1);
-    		}
+	public void insert(FileLine fl) throws PriorityQueueFullException, 
+			IllegalArgumentException {
+		if (fl == null) throw new IllegalArgumentException();
+		if (numItems >= maxSize) throw new PriorityQueueFullException();
+		queue[numItems + 1] = fl;
+				
     		int child = numItems + 1;
     		int parent = 0;
     		boolean done = false;
