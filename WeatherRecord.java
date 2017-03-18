@@ -56,7 +56,7 @@ public class WeatherRecord extends Record{
 			if (stationInt1 != stationInt2) {
 				return stationInt1 - stationInt2;
 			} else if (dateInt1 != dateInt2) {
-				return date1 - date2;
+				return dateInt1 - dateInt2;
 			} else {
 				return 0;
 			}
@@ -96,11 +96,11 @@ public class WeatherRecord extends Record{
 	 * values which were similarly parsed.
 	 */
     	public void join(FileLine li) {
-	    	String [] splitLine = li.getString.split(",");
+	    	String [] splitLine = li.getString().split(",");
 	    	stationID = Integer.parseInt(splitLine[0]);
 	    	date = Integer.parseInt(splitLine[1]);
 	    	readings[li.getFileIterator().getIndex()] 
-			= Double.parseDouble(splitLine[2]);
+	    		= Double.parseDouble(splitLine[2]);
     	}
 	
 	/**
@@ -121,6 +121,6 @@ public class WeatherRecord extends Record{
 		} else {
 			line += "-";
 		}
-	    	return line;
+	    return line;
     	}
 }
