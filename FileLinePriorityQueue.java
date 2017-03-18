@@ -6,24 +6,19 @@ import java.util.Comparator;
  *
  */
 public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
-    // TODO - working
+    	// TODO - working
 	private FileLine[] queue;
 	private int numItems;
-	
-    private Comparator<FileLine> cmp;
-    private int maxSize;
-
-    public FileLinePriorityQueue(int initialSize, Comparator<FileLine> cmp) {
+	private Comparator<FileLine> cmp;
+	private int maxSize;
+	public FileLinePriorityQueue(int initialSize, Comparator<FileLine> cmp) {
 		this.cmp = cmp;
 		maxSize = initialSize;
-		
-		// TODO - working
-		queue = new FileLine[maxSize];
-		numItems = 0;
-		
-    }
-
-    public FileLine removeMin() throws PriorityQueueEmptyException {
+		queue = new FileLine[maxSize + 1];
+		numItems = 0;	
+    	}
+	
+	public FileLine removeMin() throws PriorityQueueEmptyException {
 	    if(isEmpty()) {
 		    throw new PriortyQueueEmptyException();
 	    }
@@ -47,46 +42,46 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 	    }
 	    numItems--;
 	    return min;
-    }
-
-    public void insert(FileLine fl) throws PriorityQueueFullException {
-		// TODO - working
-    	try {
-    		if (fl == null) throw new IllegalArgumentExeption();
-    		if (numItems >= maxSize) throw new PriorityQueueFullException();
-    	} catch (IllegalArgumentEception e) {
-    		System.out.println("Illegal Argument");
-    		System.exit(1);
-    	} catch (PriorityQueueFullException e) {
-    		System.out.println("Priority Queue Full");
-    		System.exit(1);
     	}
-    	int child = numItems + 1;
-    	int parent = 0;
-    	boolean done = false;
-    	queue[child] = fl;
-    	while (! done) {
-    		parent = child / 2;
-    		if (parent == 0) {
-    			done = true;
+	
+	public void insert(FileLine fl) throws PriorityQueueFullException {
+		try {
+			if (fl == null) throw new IllegalArgumentExeption();
+			if (numItems >= maxSize) throw new PriorityQueueFullException();
+    		} catch (IllegalArgumentEception e) {
+    			System.out.println("Illegal Argument");
+    			System.exit(1);
+    		} catch (PriorityQueueFullException e) {
+    			System.out.println("Priority Queue Full");
+    			System.exit(1);
     		}
-    		else if (cmp.compare(queue[parent], queue[child]) <= 0) {
-    			done = true;
+    		int child = numItems + 1;
+    		int parent = 0;
+    		boolean done = false;
+    		queue[child] = fl;
+    		while (! done) {
+    			parent = child / 2;
+    			if (parent == 0) {
+    				done = true;
+    			}
+    			else if (cmp.compare(queue[parent], queue[child]) <= 0) {
+    				done = true;
+    			}
+			else {
+				swapQueue(parent, child);
+				parent = child;
     		}
-		else {
-			swapQueue(parent, child);
-			parent = child;
+    		numItems++;
     	}
-    	numItems++;
-    }
-    private void swapQueue(int parent, int child) {
-	    FileLine temp;
-	    temp = queue[child];
-	    queue[child] = queue[parent];
-	    queue[parent] = temp;
-    }
+		
+    	private void swapQueue(int parent, int child) {
+	    	FileLine temp;
+	    	temp = queue[child];
+	    	queue[child] = queue[parent];
+	    	queue[parent] = temp;
+    	}
 
-    public boolean isEmpty() {
-	    return numItems == 0;
-    }
+    	public boolean isEmpty() {
+	    	return numItems == 0;
+    	}
 }
