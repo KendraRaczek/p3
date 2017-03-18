@@ -50,7 +50,7 @@ public class Reducer {
 		// list of files for stocking the PQ
 		fileList = new ArrayList<FileIterator>();
 
-		for(int i = 0; i < files.length; i++) {
+		for (int i = 0; i < files.length; i++) {
 			File f = files[i];
 			if(f.isFile() && f.getName().endsWith(".txt")) {
 				fileList.add(new FileIterator(f.getAbsolutePath(), i));
@@ -68,7 +68,8 @@ public class Reducer {
 			System.out.println("Invalid type of data! " + type);
 			System.exit(1);
 		}
-		FileLinePriorityQueue fileQueue = new FileLinePriorityQueue(fileList.size(), r.getComparator());
+		FileLinePriorityQueue fileQueue 
+			= new FileLinePriorityQueue(fileList.size(), r.getComparator());
 		PrintWriter output = new PrintWriter(outFile);
 	    	try {
 			for (int = 0; i < fileList.size(); i++) {
@@ -77,12 +78,12 @@ public class Reducer {
 			FileLine file1 = fileQueue.removeMin()
 			r.join(file1);
 			fileQueue.insert(file1.getFileIterator().next());
-			while(!fileQueue.isEmpty()) {
+			while (!fileQueue.isEmpty()) {
 				FileLine file2 = fileQueue.removeMin();
-				if(file2.getFileIterator().hasNext()) {
+				if (file2.getFileIterator().hasNext()) {
 					fileQueue.insert(file2.getFileIterator().next());
 				}
-				if(r.getComparator().compare(file1, file2) == 0) {
+				if (r.getComparator().compare(file1, file2) == 0) {
 					r.join(file2);
 				}
 				else {
