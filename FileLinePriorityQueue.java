@@ -24,9 +24,29 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     }
 
     public FileLine removeMin() throws PriorityQueueEmptyException {
-		// TODO
-
-		return null;
+	    if(isEmpty()) {
+		    throw new PriortyQueueEmptyException();
+	    }
+	    FileLine min = queue[1];
+	    queue[1] = queue[numItems];
+	    
+	    int parent = 1;
+	    int child;
+	    boolean done = false;
+	    while(!done) {
+		    if(child > numItems) {
+			    done = true;
+		    }
+		    else if(cmp.compare(queue[parent], queue[child]) <= 0) {
+			    done = true;
+		    }
+		    else {
+			    swapQueue(parent, child);
+			    parent = child;
+		    }
+	    }
+	    numItems--;
+	    return min;
     }
 
     public void insert(FileLine fl) throws PriorityQueueFullException {
@@ -41,7 +61,6 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     		System.out.println("Priority Queue Full");
     		System.exit(1);
     	}
-    	
     	int child = numItems + 1;
     	int parent = 0;
     	boolean done = false;
@@ -51,7 +70,7 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     		if (parent == 0) {
     			done = true;
     		}
-    		else if (cmp.compare (queue[parent], queue[child]) <= 0) {
+    		else if (cmp.compare(queue[parent], queue[child]) <= 0) {
     			done = true;
     		}
 		else {
