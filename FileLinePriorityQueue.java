@@ -51,17 +51,23 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     		if (parent == 0) {
     			done = true;
     		}
-    		else if (cmp.compare (queue[parent], queue[child]) < 0) {
+    		else if (cmp.compare (queue[parent], queue[child]) <= 0) {
     			done = true;
     		}
- // TODO: else - swap
+		else {
+			swapQueue(parent, child);
+			parent = child;
     	}
-    	
-    	
+    	numItems++;
+    }
+    private void swapQueue(int parent, int child) {
+	    FileLine temp;
+	    temp = queue[child];
+	    queue[child] = queue[parent];
+	    queue[parent] = temp;
     }
 
     public boolean isEmpty() {
-		// TODO
-		return true;
+	    return numItems == 0;
     }
 }
