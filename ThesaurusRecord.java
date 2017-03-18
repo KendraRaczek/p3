@@ -11,6 +11,7 @@
 //////////////////////////// 80 columns wide //////////////////////////////////
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -21,7 +22,7 @@ import java.util.Comparator;
 public class ThesaurusRecord extends Record{
 	private int numFiles;
 	private String word;
-	private ArrayList<String> syn = new ArrayList<String>;
+	private ArrayList<String> syn = new ArrayList<String>();
 	
 	/**
 	 * Constructs a new ThesaurusRecord by passing the parameter to the 
@@ -78,8 +79,8 @@ public class ThesaurusRecord extends Record{
     	public void join(FileLine w) {
 	    	String[] fileSplit = w.getString().split(":");
 	    	word = fileSplit[0];
-	    	String[] synArray = fileSplit[1].getString().split(",");
-	    	for (int i = 0; i < synArray.length(); i++) {
+	    	String[] synArray = fileSplit[1].split(",");
+	    	for (int i = 0; i < synArray.length; i++) {
 		    	if (!syn.contains(synArray[i])) {
 			    	syn.add(synArray[i]);
 		    	}
@@ -94,7 +95,7 @@ public class ThesaurusRecord extends Record{
     	public String toString() {
     		String tRecord = word + ":";
     		for (int i = 0; i < syn.size() - 1; i++) {
-			tRecord += syn.get(i) + ",";
+				tRecord += syn.get(i) + ",";
 		}
     		tRecord += syn.get(syn.size() - 1);
 		return tRecord;
