@@ -3,29 +3,29 @@ o working
 + done
 
 1. WeatherRecord
-  o (K) Data Members
-  o (M) WeatherLineComparator
-    - compare()
-    - clear()
-    - join()
-    - toString()
+  + (KM) Data Members
+  + WeatherLineComparator
+    + (M) compare()
+    + (M) clear()
+    + (M) join()
+    + (M) toString()
   
 2. ThesaurusRecord
   + (KM) Data Members
   + ThesaurusLineComparator
     + (K) compare()
-    + (K) clear()
+    + (KM) clear()
     + (M) join()
     + (K) toString()
     
 3. FileLinePriorityQueue
-  o (K) Data Members
-  o (K) Constructor
-  o (M) removeMin()
+  + (K) Data Members
+  + (K) Constructor
+  + (M) removeMin()
     - throw a PriorityQueueEmptyException if the queue is empty
-  o (K) insert()
+  + (KM) insert()
     - throw a PriorityQueueFullException if the queue is full
-  o (M) isEmpty()
+  + (M) isEmpty()
   
   4. Reducer
-    - run() // main
+    o (M) run() // main
