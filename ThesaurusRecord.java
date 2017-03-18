@@ -66,8 +66,10 @@ public class ThesaurusRecord extends Record{
 	 */
     	public void clear() {
     		word = null;
-    		for (int i = syn.size() - 1; i >= 0; i--) {
-			syn.remove(i);
+    		try {
+			syn.clear();
+		} catch (NullPointerException e) {
+			
 		}
     	}
 	
