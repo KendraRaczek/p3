@@ -68,7 +68,38 @@ public class Reducer {
 			System.out.println("Invalid type of data! " + type);
 			System.exit(1);
 		}
-
-		// TODO
+		FileLinePriorityQueue fileQueue = new FileLinePriorityQueue(fileList.size(), r.getComparator());
+		PrintWriter output = new PrintWriter(outFile);
+	    	try {
+			for (int = 0; i < fileList.size(); i++) {
+				fileQueue.insert(fileList.get(i).next());
+			}
+			FileLine file1 = fileQueue.removeMin()
+			r.join(file1);
+			fileQueue.insert(file1.getFileIterator().next());
+			while(!fileQueue.isEmpty()) {
+				FileLine file2 = fileQueue.removeMin();
+				if(file2.getFileIterator().hasNext()) {
+					fileQueue.insert(file2.getFileIterator().next());
+				}
+				if(r.getComparator().compare(file1, file2) == 0) {
+					r.join(file2);
+				}
+				else {
+					output.println(r);
+					r.clear()
+					file1 = file2;
+					r.join(file1);
+				}
+			}
+			output.println(r.toString());
+			output.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("Error: File not found.");
+		} catch (PriorityQueueEmptyException e) {
+			System.out.println("Error: cannot remove from an empty queue.");
+		} catch (FileNotFoundException e) {
+			System.out.println("Error: queue is overfull");
+		}
     }
 }
