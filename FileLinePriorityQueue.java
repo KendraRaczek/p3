@@ -19,7 +19,6 @@ import java.util.Comparator;
  *
  */
 public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
-    	// TODO - working
 	private FileLine[] queue;
 	private int numItems;
 	private Comparator<FileLine> cmp;
@@ -33,26 +32,26 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     	}
 	
 	public FileLine removeMin() throws PriorityQueueEmptyException {
-	    	if (isEmpty()) throw new PriortyQueueEmptyException();
-	    	FileLine min = queue[1];
-	    	queue[1] = queue[numItems];
+	    if (isEmpty()) throw new PriorityQueueEmptyException();
+	    FileLine min = queue[1];
+	    queue[1] = queue[numItems];
 	    
-	    	int parent = 1;
-	    	int child;
-	    	boolean done = false;
-	    	while (!done) {
-		    	if (child > numItems) {
-			    	done = true;
-		    	} else if (cmp.compare(queue[parent], 
+	    int parent = 1;
+	    int child = 0;
+	    boolean done = false;
+	    while (!done) {
+		    if (child > numItems) {
+			    done = true;
+		    } else if (cmp.compare(queue[parent], 
 					     queue[child]) <= 0) {
-			    	done = true;
-		    	} else {
-			    	swap(parent, child);
-			    	child = parent;
-		    	}
-	    	}
-	    	numItems--;
-	    	return min;
+			    done = true;
+		    } else {
+			    swap(parent, child);
+			    child = parent;
+		    }
+	    }
+	    numItems--;
+	    return min;
     	}
 	
 	public void insert(FileLine fl) throws PriorityQueueFullException, 
@@ -71,14 +70,15 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     			if (parent == 0) {
     				done = true;
     			} else if (cmp.compare(queue[parent], 
-					       queue[child]) <= 0) {
+					      queue[child]) <= 0) {
     				done = true;
     			} else {
 				swap(parent, child);
 				child = parent;
+    			}
+    			numItems++;
     		}
-    		numItems++;
-    	}
+	}
 		
     	private void swap(int parent, int child) {
 	    	FileLine temp;
