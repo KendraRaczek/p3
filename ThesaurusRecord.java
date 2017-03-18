@@ -65,7 +65,7 @@ public class ThesaurusRecord extends Record{
 	 */
     	public void clear() {
     		word = null;
-    		for(int i = syn.size() - 1; i >= 0; i--){
+    		for (int i = syn.size() - 1; i >= 0; i--) {
 			syn.remove(i);
 		}
     	}
@@ -79,8 +79,8 @@ public class ThesaurusRecord extends Record{
 	    	String[] fileSplit = w.getString().split(":");
 	    	word = fileSplit[0];
 	    	String[] synArray = fileSplit[1].getString().split(",");
-	    	for(int i = 0; i < synArray.length(); i++) {
-		    	if(!syn.contains(synArray[i])) {
+	    	for (int i = 0; i < synArray.length(); i++) {
+		    	if (!syn.contains(synArray[i])) {
 			    	syn.add(synArray[i]);
 		    	}
 	    	}
