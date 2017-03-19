@@ -28,4 +28,11 @@ o working
   + (M) isEmpty()
   
   4. Reducer
-    o (M) run() // main
+    + (M) run() // main
+
+
+5. Commenting/Style
+  - WeatherRecord
+  + (K) ThesaurusRecord
+  - FileLinePriorityQueue
+  - Reducer
