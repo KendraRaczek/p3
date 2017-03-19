@@ -23,13 +23,13 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 	private int numItems;
 	private Comparator<FileLine> cmp;
 	private int maxSize;
-	public FileLinePriorityQueue
-			(int initialSize, Comparator<FileLine> cmp) {
+	
+	public FileLinePriorityQueue (int initialSize, Comparator<FileLine> cmp) {
 		this.cmp = cmp;
 		maxSize = initialSize;
 		queue = new FileLine[maxSize + 1];
 		numItems = 0;	
-    	}
+    }
 	
 	public FileLine removeMin() throws PriorityQueueEmptyException {
 	    if (isEmpty()) throw new PriorityQueueEmptyException();
@@ -43,7 +43,6 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 	    numItems--;
 	    
 	    while (!done) {
-
 	    	child = parent * 2;
 
             if ((!(child + 1 > numItems))) {
@@ -52,7 +51,6 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
             		child++;
             	}
             }
-	    	
             if (child > numItems) {
             	done = true;
             } else if (cmp.compare(queue[parent], 
@@ -63,9 +61,8 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
             	parent = child;
             }
 	    }
-
 	    return min;
-    	}
+    }
 	
 	public void insert(FileLine fl) throws PriorityQueueFullException, 
 			IllegalArgumentException {
@@ -93,14 +90,14 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     		numItems++;
 	}
 		
-    	private void swap(int parent, int child) {
-	    	FileLine temp;
-	    	temp = queue[child];
-	    	queue[child] = queue[parent];
-	    	queue[parent] = temp;
-    	}
+    private void swap(int parent, int child) {
+	    FileLine temp;
+	    temp = queue[child];
+	    queue[child] = queue[parent];
+	    queue[parent] = temp;
+    }
 
-    	public boolean isEmpty() {
-	    	return numItems == 0;
-    	}
+    public boolean isEmpty() {
+	    return numItems == 0;
+    }
 }
