@@ -32,7 +32,7 @@ o working
 
 
 5. Commenting/Style
-  - WeatherRecord
+  + (K) WeatherRecord
   + (K) ThesaurusRecord
   - FileLinePriorityQueue
   - Reducer
