@@ -10,6 +10,7 @@
 //
 //////////////////////////// 80 columns wide //////////////////////////////////
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
@@ -23,7 +24,7 @@ public class WeatherRecord extends Record{
 	private int stationID;
 	// second number in FileLine
 	private int date;
-	
+	// number of files to be used for array of readings
 	private int numFiles;
 	// array of readings for a specific station and date, ordered by type
 	private double [] readings;
