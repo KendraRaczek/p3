@@ -42,6 +42,17 @@ public class ThesaurusRecord extends Record{
 	 */
 	private class ThesaurusLineComparator implements Comparator<FileLine> {
 		
+		/**
+		 * This method compares two thesaurus FileLines: if the word
+		 * entry of the first is less than the second in lexographic
+		 * ordering, return a negative number; if greater than, return
+		 * a positive number; if equal, return 0.
+		 *
+		 * @param l1: the first FileLine to compare
+		 * @param l2: the second FileLine to compare
+		 * @return negative, positive, or 0 indicating how the two
+		 * FileLines compare
+		 */
 		public int compare(FileLine l1, FileLine l2) {
 			String[] line1 = l1.getString().split(":");
 			String[] line2 = l2.getString().split(":");
