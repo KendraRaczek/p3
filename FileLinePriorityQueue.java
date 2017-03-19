@@ -35,24 +35,37 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 	    if (isEmpty()) throw new PriorityQueueEmptyException();
 	    FileLine min = queue[1];
 	    queue[1] = queue[numItems];
-// queue[numItems] = null;?	    remove last item(leaf)
+	    queue[numItems] = null;
+	    
 	    int parent = 1;
-//  something wrong with child being 0?
-	    int child = 0; 
+	    int child = 0;
 	    boolean done = false;
-	    while (!done) {
-		    if (child > numItems) {
-			    done = true;
-// here: queue[child] (queue[0]) is null
-		    } else if (cmp.compare(queue[parent], 
-					     queue[child]) <= 0) {
-			    done = true;
-		    } else {
-			    swap(parent, child);
-			    child = parent;
-		    }
-	    }
 	    numItems--;
+	    
+	    while (!done) {
+
+	    	child = parent * 2;
+
+            if ((!(child + 1 > numItems))) {
+            	if ( cmp.compare(queue[child],
+                                   queue[child+1]) > 0) {
+            	
+            		child++;
+            	}
+            }
+	   
+		if (child > numItems) {
+			done = true;
+		} else if (cmp.compare(queue[parent], queue[child]) <= 0) {
+			done = true;
+		} else {
+			swap(parent, child);
+			parent = child;
+		}
+			    
+
+	    }
+
 	    return min;
     	}
 	
