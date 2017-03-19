@@ -93,14 +93,15 @@ public class Reducer {
 	    	FileLine file1 = fileQueue.removeMin();
 	    	r.join(file1);
 	    	fileQueue.insert(file1.getFileIterator().next());
+	    	
 	    	while (!fileQueue.isEmpty()) {
 	    		FileLine file2 = fileQueue.removeMin();
 	    		if (file2.getFileIterator().hasNext()) {
-	    			fileQueue.insert(file2.getFileIterator().
+	    			fileQueue.insert(file2.
+							 getFileIterator().
 							 next());
 	    		}
-	    		if (r.getComparator().compare(file1, file2) 
-	    					 == 0) {
+	    		if (r.getComparator().compare(file1, file2) == 0) {
 	    			r.join(file2);
 	    		} else {
 	    			output.println(r);
@@ -111,7 +112,6 @@ public class Reducer {
 	    	}
 	    	output.println(r.toString());
 	    	output.close();
-			
 	    } catch (FileNotFoundException e) {
 	    	System.out.println("Error: File not found.");
 	    } catch (PriorityQueueEmptyException e) {
