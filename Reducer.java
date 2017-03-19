@@ -87,8 +87,8 @@ public class Reducer {
 	    				FileLinePriorityQueue
 	    				(fileList.size(), r.getComparator());
 	    		PrintWriter output = new PrintWriter(outFile);
-	    		for (int i = 0; i < fileList.size(); i++) {
-	    			fileQueue.insert(fileList.get(i).next());
+	    		for (FileIterator itr : fileList) {
+	    			fileQueue.insert(itr.next());
 	    		}
 	    		FileLine file1 = fileQueue.removeMin();
 	    		r.join(file1);
@@ -104,7 +104,7 @@ public class Reducer {
 	    					 == 0) {
 	    				r.join(file2);
 	    			} else {
-	    				output.println(r);
+	    				output.println(r.toString());
 	    				r.clear();
 	    				file1 = file2;
 	    				r.join(file1);
