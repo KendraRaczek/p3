@@ -83,7 +83,8 @@ public class Reducer {
 		}
 		
 	    	try {
-	    		FileLinePriorityQueue fileQueue = new 
+	    		cmp = r.getComparator();
+			FileLinePriorityQueue fileQueue = new 
 	    				FileLinePriorityQueue
 	    				(fileList.size(), r.getComparator());
 	    		PrintWriter output = new PrintWriter(outFile);
