@@ -109,14 +109,16 @@ public class WeatherRecord extends Record{
 	 */
     	public String toString() {
 		String line = stationID + "," + date + ",";
-	    	for (int i = 0; i < readings.length; i++) {
-			if (readings[i] > Double.MIN_VALUE) {
+	    	for (int i = 0; i < readings.length - 1; i++) {
+			if (readings[i] > Double.MIN_VALUE 
+			    		|| readings[i] < 0) {
 				line += readings[i] + ",";
 			} else {
 				line += "-,";
 			}
 		}
-	    	if (readings[readings.length - 1] > Double.MIN_VALUE) {
+	    	if (readings[readings.length - 1] > Double.MIN_VALUE 
+		    		|| readings[readings.length - 1] < 0) {
 			line += readings[readings.length - 1];
 		} else {
 			line += "-";
