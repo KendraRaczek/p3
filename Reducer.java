@@ -83,36 +83,46 @@ public class Reducer {
 		}
 		
 	    	try {
-	    		cmp = r.getComparator();
+	    		Comparator<FileLine> cmp = r.getComparator();
 			FileLinePriorityQueue fileQueue = new 
 	    				FileLinePriorityQueue
-	    				(fileList.size(), r.getComparator());
-	    		PrintWriter output = new PrintWriter(outFile);
-	    		for (FileIterator itr : fileList) {
-	    			fileQueue.insert(itr.next());
+	    				(fileList.size(), cmp);
+	    		File output = new File(outFile);
+			PrintWriter writer = new PrintWriter(output);
+			
+	    		for (FileIterator itr1 : fileList) {
+	    			fileQueue.insert(itr1.next());
 	    		}
 	    		FileLine file1 = fileQueue.removeMin();
 	    		r.join(file1);
-	    		fileQueue.insert(file1.getFileIterator().next());
+			FileIterator itr2 = file1.getFileIterator();
+			if (itr2.hasNext()) {
+				file1 = itr2.next();
+	    			fileQueue.insert(file1);
+			}
 	    		while (!fileQueue.isEmpty()) {
-	    			FileLine file2 = fileQueue.removeMin();
-	    			if (file2.getFileIterator().hasNext()) {
-	    				fileQueue.insert(file2.
-							 getFileIterator().
-							 next());
-	    			}
-	    			if (r.getComparator().compare(file1, file2) 
-	    					 == 0) {
-	    				r.join(file2);
-	    			} else {
-	    				output.println(r.toString());
+	    			file1 = fileQueue.removeMin();
+				String temp1 = null;
+				String temp2 = null;
+	    			if (type.equals("thesaurus")) {
+	    				temp1 = r.toString().split(":")[0];
+					temp2 = file1.getString().split(":")[0];
+	    			} else if (type.equals("weather")) {
+	    				String [] strArray1 = r.toString().split(",");
+					temp1 = strArray1[0] + "," + strArray1[1];
+					String [] strArray2 = file1.getString().split(",");
+					temp2 = strArray2[0] + "," + strArray2[1];
+	    			} if (temp1.equals(temp2)) {
+					r.join(file1);
+				} else {
+	    				writer.println(r);
 	    				r.clear();
-	    				file1 = file2;
 	    				r.join(file1);
 	    			}
 	    		}
-	    		output.println(r.toString());
-	    		output.close();
+	    		writer.println(r);
+			writer.flush();
+	    		writer.close();
 			
 	    	} catch (FileNotFoundException e) {
 	    		System.out.println("Error: File not found.");
