@@ -23,6 +23,8 @@ public class WeatherRecord extends Record{
 	private int stationID;
 	// second number in FileLine
 	private int date;
+	
+	private int numFiles;
 	// array of readings for a specific station and date, ordered by type
 	private double [] readings;
 
