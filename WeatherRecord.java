@@ -18,6 +18,9 @@ import java.util.Comparator;
  * weather data. Station and Date store the station and date associated with 
  * each weather reading that this object stores. l stores the weather readings, 
  * in the same order as the files from which they came are indexed.
+ * <p>Bugs: None that we are aware of
+ *
+ * @author Michael Yang, Kendra Raczek
  */
 public class WeatherRecord extends Record{
 	// first number in FileLine
@@ -32,6 +35,8 @@ public class WeatherRecord extends Record{
 	/**
 	 * Constructs a new WeatherRecord by passing the parameter to the 
 	 * parent constructor and then calling the clear method()
+	 *
+	 * @parm numFiles: number of files to be used for array of readings
 	 */
 	public WeatherRecord(int numFiles) {
 		super(numFiles);
@@ -43,6 +48,9 @@ public class WeatherRecord extends Record{
 	 * This comparator should first compare the stations associated with  
 	 * the given FileLines. If they are the same, then the dates should 
 	 * be compared. 
+	 * <p>Bugs: None that we are aware of
+ 	 *
+ 	 * @author Michael Yang, Kendra Raczek
 	 */
 	private class WeatherLineComparator implements Comparator<FileLine> {
 		
@@ -80,18 +88,28 @@ public class WeatherRecord extends Record{
 			}
 		}
 		
+		/**
+		 * This method checks for whether or not an object is equal
+		 * to another object
+		 * 
+		 * @param o: the object that is being compared to
+		 */
 		public boolean equals(Object o) {
 			return this.equals(o);
-		}
-	}
+		} //end of equals(o) method
+		
+	} //end of WeatherLineComparator class
     
 	/**
 	 * This method should simply create and return a new instance of the 
 	 * WeatherLineComparator class.
+	 *
+	 * @return new WeatherLineComparator(): new instance of
+	 * WeatherLineComparator class.
 	 */
 	public Comparator<FileLine> getComparator() {
 		return new WeatherLineComparator();
-	}
+	} //end of getComparator() method
 	
 	/**
 	 * This method should fill each entry in the data structure containing
@@ -100,8 +118,8 @@ public class WeatherRecord extends Record{
 	public void clear() {
 		for (int i = 0; i < readings.length; i++) {
 			readings[i] = Double.MIN_VALUE;
-		}
-	}
+		} 
+	} //end of toString() method
 
 	/**
 	 * This method should parse the String associated with the given 
@@ -112,6 +130,8 @@ public class WeatherRecord extends Record{
 	 * when this WeatherRecord is empty, the station and date associated 
 	 * with this WeatherRecord should be set to the station and date 
 	 * values which were similarly parsed.
+	 *
+	 * @param l1: the FileLine to be parsed
 	 */
 	public void join(FileLine li) {
 		String [] splitLine = li.getString().split(",");
@@ -119,22 +139,25 @@ public class WeatherRecord extends Record{
 		date = Integer.parseInt(splitLine[1]);
 		readings[li.getFileIterator().getIndex()] 
 			= Double.parseDouble(splitLine[2]);
-	}
+	} //end of join(li) method
 	
 	/**
 	 * See the assignment description and example runs for the 
 	 * exact output format.
+	 *
+	 * @return line: a line of output
 	 */
 	public String toString() {
 		String line = stationID + "," + date + ",";
 		for (int i = 0; i < readings.length - 1; i++) {
-			if (readings[i] > Double.MIN_VALUE || readings[i] < 0) {
+			if (readings[i] > Double.MIN_VALUE 
+			    		|| readings[i] < 0) {
 				line += readings[i] + ",";
-			// fills absent readings with a "-"
+			// fills absent readings with a "-,"
 			} else {
 				line += "-,";
 			}
-		}
+		} 
 		// accounts for last reading without a following comma
 		if (readings[readings.length - 1] > Double.MIN_VALUE 
 	    		|| readings[readings.length - 1] < 0) {
@@ -144,5 +167,6 @@ public class WeatherRecord extends Record{
 			line += "-";
 		}
 		return line;
-	}
-}
+	} //end of toString() method
+	
+} //end of WeatherRecord class
