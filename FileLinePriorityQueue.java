@@ -49,21 +49,19 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
             if ((!(child + 1 > numItems))) {
             	if ( cmp.compare(queue[child],
                                    queue[child+1]) > 0) {
-            	
             		child++;
             	}
             }
-	   
-		if (child > numItems) {
-			done = true;
-		} else if (cmp.compare(queue[parent], queue[child]) <= 0) {
-			done = true;
-		} else {
-			swap(parent, child);
-			parent = child;
-		}
-			    
-
+	    	
+            if (child > numItems) {
+            	done = true;
+            } else if (cmp.compare(queue[parent], 
+						     queue[child]) <= 0) {
+            	done = true;
+            } else {
+            	swap(parent, child);
+            	parent = child;
+            }
 	    }
 
 	    return min;
@@ -90,9 +88,9 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     			} else {
 				swap(parent, child);
 				child = parent;
-    			}
-    			numItems++;
+    			}	
     		}
+    		numItems++;
 	}
 		
     	private void swap(int parent, int child) {
