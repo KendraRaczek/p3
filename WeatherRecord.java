@@ -42,7 +42,7 @@ public class WeatherRecord extends Record{
 		super(numFiles);
 		readings = new double[numFiles];
 		clear();
-	}
+	} //end of WeatherRecord(numFiles) constructor
 	
 	/**
 	 * This comparator should first compare the stations associated with  
@@ -86,7 +86,7 @@ public class WeatherRecord extends Record{
 			} else {
 				return 0;
 			}
-		}
+		} //end of compare(l1, l2) method
 		
 		/**
 		 * This method checks for whether or not an object is equal
@@ -119,7 +119,7 @@ public class WeatherRecord extends Record{
 		for (int i = 0; i < readings.length; i++) {
 			readings[i] = Double.MIN_VALUE;
 		} 
-	} //end of toString() method
+	} //end of clear() method
 
 	/**
 	 * This method should parse the String associated with the given 
