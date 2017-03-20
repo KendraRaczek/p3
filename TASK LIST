@@ -27,12 +27,11 @@ o working
     - throw a PriorityQueueFullException if the queue is full
   + (M) isEmpty()
   
-  4. Reducer
-    + (M) run() // main
-
+4. Reducer
+  + (M) run() // main
 
 5. Commenting/Style
   + (K) WeatherRecord
   + (K) ThesaurusRecord
   o (K) FileLinePriorityQueue
-  - Reducer
+  + (M) Reducer
