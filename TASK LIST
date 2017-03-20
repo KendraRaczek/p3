@@ -33,5 +33,5 @@ o working
 5. Commenting/Style
   + (K) WeatherRecord
   + (K) ThesaurusRecord
-  o (K) FileLinePriorityQueue
+  + (K) FileLinePriorityQueue
   + (M) Reducer
