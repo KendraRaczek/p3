@@ -22,22 +22,22 @@ import java.lang.*;
  * @author Michael Yang, Kendra Raczek
  */
 public class Reducer {
-    // list of files for stocking the PQ
-    private List<FileIterator> fileList;
-    //type: calls for thesaurus or weather
-    //dirName: directory address of input files
-    //outFile: file where output gets written out to
-    private String type,dirName,outFile;
+	// list of files for stocking the PQ
+	private List<FileIterator> fileList;
+	//type: calls for thesaurus or weather
+	//dirName: directory address of input files
+	//outFile: file where output gets written out to
+	private String type,dirName,outFile;
 	
-    /**
-     * Main function which takes the command line arguments and 
-     * instantiate the Reducer class.
-     * The main function terminates when the output is written.
-     * Use the run() method to read inputs from console
-     * @param args Command line arguments- thesaurus/weather <directory> 
-     * <output_file>
-     */
-    public static void main(String[] args) {
+	/**
+	* Main function which takes the command line arguments and 
+	* instantiate the Reducer class.
+	* The main function terminates when the output is written.
+	* Use the run() method to read inputs from console
+	* @param args Command line arguments- thesaurus/weather <directory> 
+	* <output_file>
+	*/
+	public static void main(String[] args) {
 		if (args.length != 3) {
 			System.out.println("Usage: java Reducer <weather|" 
 					   + "thesaurus> <dir_name>" 
@@ -49,7 +49,7 @@ public class Reducer {
 		String outFile = args[2];
 		Reducer r = new Reducer(type, dirName, outFile);
 		r.run();
-    } //end of main(args) method
+	} //end of main(args) method
 	
 	/**
 	 * Constructs a new instance of Reducer with the given type (a string 
@@ -59,17 +59,17 @@ public class Reducer {
          * @param dirName directory address of input files
          * @param outFile file where output gets written out to
 	 */
-    public Reducer(String type, String dirName, String outFile) {
+	public Reducer(String type, String dirName, String outFile) {
 		this.type = type;
 		this.dirName = dirName;
 		this.outFile = outFile;
-    } //end of Reducer(type, dirName, outFile) constructor
+	} //end of Reducer(type, dirName, outFile) constructor
 
 	/**
 	 * Carries out the file merging algorithm described in the assignment 
 	 * description. 
 	 */
-    public void run() {
+	public void run() {
 		File dir = new File(dirName);
 		File[] files = dir.listFiles();
 		Arrays.sort(files);
@@ -88,55 +88,54 @@ public class Reducer {
 		}
 
 		switch (type) {
-		case "weather":
-			r = new WeatherRecord(fileList.size());
-			break;
-		case "thesaurus":
-			r = new ThesaurusRecord(fileList.size());
-			break;
-		default:
-			System.out.println("Invalid type of data! " + type);
-			System.exit(1);
+			case "weather":
+				r = new WeatherRecord(fileList.size());
+				break;
+			case "thesaurus":
+				r = new ThesaurusRecord(fileList.size());
+				break;
+			default:
+				System.out.println("Invalid type of data! " 
+						   + type);
+				System.exit(1);
 		}
-		
-	    try {
-	    	FileLinePriorityQueue fileQueue = new 
+		try {
+	    		FileLinePriorityQueue fileQueue = new 
 	    				FileLinePriorityQueue
 	    				(fileList.size(), r.getComparator());
-	    	PrintWriter output = new PrintWriter(outFile);
-	    	for (int i = 0; i < fileList.size(); i++) {
-	    		fileQueue.insert(fileList.get(i).next());
-	    	}
-	    	FileLine file1 = fileQueue.removeMin();
-	    	r.join(file1);
-	    	fileQueue.insert(file1.getFileIterator().next());
-	    	
-	    	while (!fileQueue.isEmpty()) {
-	    		FileLine file2 = fileQueue.removeMin();
-	    		if (file2.getFileIterator().hasNext()) {
-	    			fileQueue.insert(file2.
-							 getFileIterator().
-							 next());
-	    		}
-	    		if (r.getComparator().compare(file1, file2) == 0) {
-	    			r.join(file2);
-	    		} else {
-	    			output.println(r);
-	    			r.clear();
-	    			file1 = file2;
-	    			r.join(file1);
-	    		}
-	    	}
-	    	output.println(r.toString());
-	    	output.close();
-	    } catch (FileNotFoundException e) {
-	    	System.out.println("Error: File not found.");
-	    } catch (PriorityQueueEmptyException e) {
-	    	System.out.println("Error: cannot remove from"
-	    				+" an empty queue.");
-	    } catch (PriorityQueueFullException e) {
-	    	System.out.println("Error: queue is overfull");
-	    } 
-    } //end of run() method
-	
+	    		PrintWriter output = new PrintWriter(outFile);
+			for (int i = 0; i < fileList.size(); i++) {
+				fileQueue.insert(fileList.get(i).next());
+			}
+			FileLine file1 = fileQueue.removeMin();
+			r.join(file1);
+			fileQueue.insert(file1.getFileIterator().next());
+
+			while (!fileQueue.isEmpty()) {
+				FileLine file2 = fileQueue.removeMin();
+				if (file2.getFileIterator().hasNext()) {
+					fileQueue.insert(file2.
+						getFileIterator().next());
+				}
+				if (r.getComparator().compare(file1, file2) 
+				    				== 0) {
+					r.join(file2);
+				} else {
+					output.println(r);
+					r.clear();
+					file1 = file2;
+					r.join(file1);
+				}
+			}
+			output.println(r.toString());
+			output.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("Error: File not found.");
+		} catch (PriorityQueueEmptyException e) {
+			System.out.println("Error: cannot remove from"
+						+" an empty queue.");
+		} catch (PriorityQueueFullException e) {
+			System.out.println("Error: queue is overfull");
+		} 
+	} //end of run() method
 } //end of Reducer class
