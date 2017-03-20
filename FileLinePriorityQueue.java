@@ -16,7 +16,9 @@ import java.util.Comparator;
  * An implementation of the MinPriorityQueueADT interface. This implementation 
  * stores FileLine objects. See MinPriorityQueueADT.java for a description 
  * of each method. 
+ * <p>Bugs: None that we are aware of
  *
+ * @author Michael Yang, Kendra Raczek
  */
 public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 	// array-based min heap containing FileLines taken from 
@@ -32,10 +34,8 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 	* Constructs a new min priority queue for either weather or thesaurus 
 	* FileLines. Contains a comparator, array-based heap, its size, and 
 	* count of FileLines.
-	*
 	* @param initialSize: maximum size of the array
-	* @param comparator for either weather or thesaurus
-	* @return newly constructed FileLinePriorityQueue
+	* @param cmp comparator for either weather or thesaurus
 	*/
 	public FileLinePriorityQueue (int initialSize, 
 			Comparator<FileLine> cmp) {
@@ -43,16 +43,15 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 		maxSize = initialSize;
 		queue = new FileLine[maxSize + 1];
 		numItems = 0;	
-	}
+	} //end of FileLinePriorityQueue(initialSize, cmp) constructor
 	
-	/**
+       /**
 	* Removes the minimum element from the Priority Queue, and returns it.
 	* Also reheapifies the array to preserve min-based ordering.
-	*
-	* @return the minimum element in the queue, according to the 
-	* compareTo() method of FileLine.
 	* @throws PriorityQueueEmptyException if the priority queue has no 
 	* elements in it
+	* @return min the minimum element in the queue, according to the 
+	* compareTo() method of FileLine.
 	*/
 	public FileLine removeMin() throws PriorityQueueEmptyException {
 		if (isEmpty()) throw new PriorityQueueEmptyException();
@@ -89,27 +88,28 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 			}
 		}
 		return min;
-	}
+	} //end of removeMin() method
 	
 	/**
 	* Inserts a FileLine into the queue, making sure to keep the shape and
 	* order properties intact.
-	*
-	* @param fl the FileLine to insert
 	* @throws PriorityQueueFullException if the priority queue is full
 	* @throws IllegalArgumentException if FileLine to insert is null
+	* @param fl the FileLine to insert
 	*/
 	public void insert(FileLine fl) throws PriorityQueueFullException, 
 			IllegalArgumentException {
 		if (fl == null) throw new IllegalArgumentException();
 		if (numItems >= maxSize) 
 			throw new PriorityQueueFullException();
+				
 		// insert item at end of the array
 		queue[numItems + 1] = fl;
     		int child = numItems + 1;
     		int parent = 0;
     		boolean done = false;
     		queue[child] = fl;
+				
 		// reheapify min priority queue	
     		while (! done) {
     			parent = child / 2;
@@ -125,11 +125,10 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
     			}	
     		}
     		numItems++;
-	}
+	} //end of insert(fl) method
 	
 	/**
-	* Swaps two FileLines in the priority queue.
-	*
+	* This method swaps two FileLines in the priority queue.
 	* @param parent: the higher priority FileLine to swap
 	* @param child: the lower priority FileLine to swap
 	*/
@@ -138,14 +137,14 @@ public class FileLinePriorityQueue implements MinPriorityQueueADT<FileLine> {
 		temp = queue[child];
 		queue[child] = queue[parent];
 		queue[parent] = temp;
-	}
+	} //end of swap(parent, child) method
 
 	/**
-	* Checks if the queue is empty.
-	*
+	* This method checks for whether or not the queue is empty.
 	* @return true, if it is empty; false otherwise
 	*/
 	public boolean isEmpty() {
 		return numItems == 0;
-	}
-}
+	} //end of isEmpty() method
+	
+} //end of FileLinePriorityQueue class
