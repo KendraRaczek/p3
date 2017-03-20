@@ -17,12 +17,26 @@ import java.lang.*;
 /**
  * Reducer solves the following problem: given a set of sorted input files 
  * (each containing the same type of data), merge them into one sorted file. 
+ * <p>Bugs: None that we are aware of
+ *
+ * @author Michael Yang, Kendra Raczek
  */
 public class Reducer {
     // list of files for stocking the PQ
     private List<FileIterator> fileList;
+    //type: calls for thesaurus or weather
+    //dirName: directory address of input files
+    //outFile: file where output gets written out to
     private String type,dirName,outFile;
-
+	
+    /**
+     * Main function which takes the command line arguments and 
+     * instantiate the Reducer class.
+     * The main function terminates when the output is written.
+     * Use the run() method to read inputs from console
+     * @param args Command line arguments- thesaurus/weather <directory> 
+     * <output_file>
+     */
     public static void main(String[] args) {
 		if (args.length != 3) {
 			System.out.println("Usage: java Reducer <weather|" 
@@ -35,18 +49,21 @@ public class Reducer {
 		String outFile = args[2];
 		Reducer r = new Reducer(type, dirName, outFile);
 		r.run();
-    }
+    } //end of main(args) method
 	
 	/**
 	 * Constructs a new instance of Reducer with the given type (a string 
 	 * indicating which type of data is being merged), the directory which 
 	 * contains the files to be merged, and the name of the output file.
+	 * @param type calls for thesaurus or weather
+         * @param dirName directory address of input files
+         * @param outFile file where output gets written out to
 	 */
     public Reducer(String type, String dirName, String outFile) {
 		this.type = type;
 		this.dirName = dirName;
 		this.outFile = outFile;
-    }
+    } //end of Reducer(type, dirName, outFile) constructor
 
 	/**
 	 * Carries out the file merging algorithm described in the assignment 
@@ -120,5 +137,6 @@ public class Reducer {
 	    } catch (PriorityQueueFullException e) {
 	    	System.out.println("Error: queue is overfull");
 	    } 
-    }
-}
+    } //end of run() method
+	
+} //end of Reducer class
